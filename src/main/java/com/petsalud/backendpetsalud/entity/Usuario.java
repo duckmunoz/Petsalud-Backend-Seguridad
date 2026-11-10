@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "usuarios")
@@ -23,8 +24,9 @@ public class Usuario {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false)
-    private String password;
+   @JsonIgnore
+@Column(nullable = false)
+private String password;
 
     private String nombre;
 
@@ -39,8 +41,9 @@ public class Usuario {
     private Rol rol;
 
     // Relaciones
-    @OneToMany(mappedBy = "propietario", cascade = CascadeType.ALL)
-    private List<Mascota> mascotas;
+    @JsonIgnore
+@OneToMany(mappedBy = "propietario", cascade = CascadeType.ALL)
+private List<Mascota> mascotas;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Venta> ventas;
